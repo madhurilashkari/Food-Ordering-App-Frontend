@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import "./Home.css";
 import Header from "../../common/header/Header";
 
-class Home extends Components{
+class Home extends Component{
 constructor(props){
         super(props);
         
@@ -12,7 +12,7 @@ constructor(props){
 render(){
     return(
         <div>
-            <Header/>
+            <Header />
         </div>
     )
 }
