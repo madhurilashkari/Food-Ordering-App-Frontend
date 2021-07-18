@@ -44,6 +44,67 @@ noOfColumns = () => {
 
 }
 
+getRestaurants = () => {
+    let that = this;
+    let restaurantsData = null;
+    let xhrRestaurants = new XMLHttpRequest();
+    xhrRestaurants.onload = this.setState({ loading: true })
+    xhrRestaurants.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+            that.setState({
+                restaurants: JSON.parse(this.responseText).restaurants,
+                loading: false
+            });
+        }
+    })
+    let url = this.props.baseUrl + 'restaurant';
+    xhrRestaurants.open("GET", url);
+    xhrRestaurants.send(restaurantsData);
+}
+
+componentWillMount() {
+    let restaurantsData = null;
+    let xhr = new XMLHttpRequest();
+    let that = this;
+    xhr.addEventListener('readystatechange', function () {
+      if (this.readyState === 4) {
+        
+        that.setState({
+          restaurants:JSON.parse(this.responseText).restaurants
+        });
+        
+      }
+    });
+    let url = this.props.baseUrl + 'restaurant';
+    xhr.open("GET", url);
+    xhr.send(restaurantsData)
+  }
+
+  searchHandler = (event) => {
+    let that = this;
+    let filteredRestaurants = null;
+    let xhrFilteredRestaurants = new XMLHttpRequest();
+    xhrFilteredRestaurants.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            if (!JSON.parse(this.responseText).restaurants) {
+                that.setState({
+                    restaurants: null
+                });
+            } else {
+                that.setState({
+                    restaurants: JSON.parse(this.responseText).restaurants
+                });
+            }
+        }
+    });
+    if (!event.target.value === '') {
+       
+        let url = this.props.baseUrl + 'restaurant/name/' + event.target.value;
+        xhrFilteredRestaurants.open("GET", url);
+        xhrFilteredRestaurants.send(filteredRestaurants);
+    }
+}
+
 
 class Home extends Component {
     constructor(props) {
