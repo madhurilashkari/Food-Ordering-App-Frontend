@@ -44,23 +44,7 @@ noOfColumns = () => {
 
 }
 
-getRestaurants = () => {
-    let that = this;
-    let restaurantsData = null;
-    let xhrRestaurants = new XMLHttpRequest();
-    xhrRestaurants.onload = this.setState({ loading: true })
-    xhrRestaurants.addEventListener('readystatechange', function () {
-        if (this.readyState === 4) {
-            that.setState({
-                restaurants: JSON.parse(this.responseText).restaurants,
-                loading: false
-            });
-        }
-    })
-    let url = this.props.baseUrl + 'restaurant';
-    xhrRestaurants.open("GET", url);
-    xhrRestaurants.send(restaurantsData);
-}
+
 
 componentWillMount() {
     let restaurantsData = null;

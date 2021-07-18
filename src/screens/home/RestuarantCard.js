@@ -16,11 +16,11 @@ class Post extends Component {
         const { classes, restaurant } = this.props;
         return (
             <div>
-                <Card
+                <Card onClick={() => this.restaurantDetails(restaurant.id)}
                     style={{
                         width: 400,
                         backgroundColor: "white",
-                    }}
+                    }} 
                 >
                     <CardMedia
                         className={classes.media}
@@ -59,5 +59,10 @@ class Post extends Component {
         )
     }
 }
+
+restaurantDetails = (restaurantId) => {
+    this.props.history.push('/restaurant/' + restaurantId);
+}
+
 
 export default Post;
